@@ -1,5 +1,8 @@
 Revision history for Perl extension WWW::Hotmail.
 
+0.06 Wed Aug 18 10:31:46 2004
+	- removed a debug print
+	
 0.05 Mon Aug 16 14:46:42 2004
 	- fixed the delete method
 	- added prereq for Mail::Internet even though Mail::Audit
