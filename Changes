@@ -1,5 +1,8 @@
 Revision history for Perl extension WWW::Hotmail.
 
+0.04 Sun Aug 15 10:35:21 2004
+	- fixed warning when deleting messages
+
 0.03 Sun Aug 15 09:51:44 2004
 	- turns out M$ encodes & into &amp; too - fixed
 

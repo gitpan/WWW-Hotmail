@@ -6,7 +6,7 @@ use 5.006;
 use strict;
 use warnings;
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 sub new {
     my $class = shift;
@@ -127,7 +127,7 @@ sub delete {
     my $resp = $self->{_WWW_Hotmail_parent}->get($self->_link()->url());
     $resp->is_success || Carp::croak $resp->error_as_HTML;
     for (@{$self->{_WWW_Hotmail_parent}->links()}) {
-        if ($_->[1] eq "Delete") { 
+        if ($_->[1] && $_->[1] eq "Delete") { 
             $self->{_WWW_Hotmail_parent}->get($_->url());
             last;
        }
