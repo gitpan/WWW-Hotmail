@@ -1,0 +1,43 @@
+NAME
+    WWW::Hotmail - Connect to Hotmail and download messages
+
+SYNOPSIS
+      use WWW::Hotmail;
+      my $browser = new WWW::Hotmail;
+      $browser->login("foo", "bar");
+      for ($browser->messages) { $_->retrieve->accept; $_->delete; }
+
+DESCRIPTION
+    This module is a partial replacement for the "gotmail" script
+    (http://ssl.usu.edu/paul/gotmail/), so if this doesn't do what you want,
+    try that instead.
+
+    Create a new "WWW::Hotmail" object with "new", and then log in with your
+    Hotmail username and password. This will allow you to use the "messages"
+    method to look at the mail in your inbox.
+
+    This method returns a list of "WWW::Hotmail::Message"s; each message
+    supports three methods: "subject" gives you the subject of the email,
+    just because it was stunningly easy to implement. "retrieve" turns the
+    email into a "Mail::Audit" object - see Mail::Audit for more details.
+    Finally "delete" moves it to your trash.
+
+    That's it. I said it was partial.
+
+SEE ALSO
+    WWW::Mechanize, Mail::Audit, "gotmail"
+
+NOTE
+    This module is reasonable fragile. It seems to work, but I haven't
+    tested edge cases. If it breaks, you get to keep both pieces. I hope to
+    improve it in the future, but this is enough for release.
+
+AUTHOR
+    Simon Cozens, <simon@kasei.com>
+
+COPYRIGHT AND LICENSE
+    Copyright 2003 by Kasei
+
+    This library is free software; you can redistribute it and/or modify it
+    under the same terms as Perl itself.
+
