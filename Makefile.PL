@@ -9,7 +9,10 @@ WriteMakefile(
          WWW::Mechanize => 0,
          Mail::Audit    => 2.1,
          Crypt::SSLeay  => 0,
-    }, # e.g., Module::Name => 1.1
+		 # Mail::Audit does this, but for some reason I
+		 # got an automated error.
+		 Mail::Internet => 0,
+    },
     ($] >= 5.005 ?  
        (AUTHOR     => 'David Davis <xantus@cpan.org>') : ()),
 );

@@ -6,7 +6,7 @@ use 5.006;
 use strict;
 use warnings;
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 sub new {
     my $class = shift;
@@ -30,6 +30,7 @@ sub login {
 	}
     $self->form_name('form1');
 	# this SHOULD cover charter.com, compaq.net, hotmail.com, msn.com, passport.com, and webtv.net
+	# all this java regex crap is needed just for this feature. Maybe this can be done better?
 	if ($self->{content} =~ m#name="$domain" action="([^"]+)"#) {
 		# current_form returns a HTML::Form obj
 		$self->current_form()->action($1);
@@ -97,9 +98,7 @@ sub _link { $_[0]->{_WWW_Hotmail_msg} }
 
 sub retrieve {
     my $self = shift;
-    my $resp = $self->{_WWW_Hotmail_parent}->get(
-                       $self->_link()->url()."&raw=0"
-               );
+    my $resp = $self->{_WWW_Hotmail_parent}->get($self->_link()->url()."&raw=0");
     $resp->is_success || Carp::croak $resp->error_as_HTML;
 	
 	# fix Hotmail's conversions
@@ -116,6 +115,7 @@ sub retrieve {
 	pop @mail;
 	# repair line endings
 	@mail = map { $_."\n" } @mail;
+	print join('',@mail);
     my $msg = Mail::Audit->new(data => \@mail);
 	# set this option for them
 	$msg->noexit(1);
@@ -126,12 +126,19 @@ sub delete {
     my $self = shift;
     my $resp = $self->{_WWW_Hotmail_parent}->get($self->_link()->url());
     $resp->is_success || Carp::croak $resp->error_as_HTML;
+	# fix java junk
+	my $content = $self->{_WWW_Hotmail_parent}->content();
+	$content =~ s/href="#" onclick="/href="/gis;
+	$content =~ s/G\('([^']+)'\);return false;/$1/gis;
+	$self->{_WWW_Hotmail_parent}->update_html($content);
+	# loop through links and find the delete link
     for (@{$self->{_WWW_Hotmail_parent}->links()}) {
-        if ($_->[1] && $_->[1] eq "Delete") { 
-            $self->{_WWW_Hotmail_parent}->get($_->url());
-            last;
-       }
-    }
+		# the delete link
+		if ($_->[0] && $_->[0] =~ m/action=move&tobox=F000000004/i) {
+			$self->{_WWW_Hotmail_parent}->get($_->url());
+			last;
+		}
+   }
 }
 
 1;

@@ -1,5 +1,10 @@
 Revision history for Perl extension WWW::Hotmail.
 
+0.05 Mon Aug 16 14:46:42 2004
+	- fixed the delete method
+	- added prereq for Mail::Internet even though Mail::Audit
+		does this already!
+
 0.04 Sun Aug 15 10:35:21 2004
 	- fixed warning when deleting messages
 
