@@ -1,5 +1,8 @@
 Revision history for Perl extension WWW::Hotmail.
 
+0.03 Sun Aug 15 09:51:44 2004
+	- turns out M$ encodes & into &amp; too - fixed
+
 0.02 Sun Aug 15 08:48:32 2004
 	- with permission from Scott, I've taken ownership of
 		this module - David Davis

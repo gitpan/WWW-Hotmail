@@ -6,7 +6,7 @@ use 5.006;
 use strict;
 use warnings;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 sub new {
     my $class = shift;
@@ -107,6 +107,7 @@ sub retrieve {
 	$content =~ s/&lt;/</gi;
 	$content =~ s/&gt;/>/gi;
 	$content =~ s/&quot;/"/gi;
+	$content =~ s/&amp;/&/gi;
 
 	# clip the top and bottom
 	my @mail = split(/\n/,$content);
