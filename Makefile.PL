@@ -11,5 +11,5 @@ WriteMakefile(
          Crypt::SSLeay  => 0,
     }, # e.g., Module::Name => 1.1
     ($] >= 5.005 ?  
-       (AUTHOR     => 'Simon Cozens <simon@kasei.com>') : ()),
+       (AUTHOR     => 'David Davis <xantus@cpan.org>') : ()),
 );

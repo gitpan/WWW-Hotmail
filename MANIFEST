@@ -3,5 +3,4 @@ Hotmail.pm
 Makefile.PL
 MANIFEST
 README
-SIGNATURE
 t/1.t

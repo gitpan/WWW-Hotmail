@@ -1,6 +1,16 @@
 Revision history for Perl extension WWW::Hotmail.
 
-0.01  Wed Jan  8 16:01:52 2003
+0.02 Sun Aug 15 08:48:32 2004
+	- with permission from Scott, I've taken ownership of
+		this module - David Davis
+	- fixed everything (hotmail changed somewhat)
+	- added support for the suite of domains hotmail controls
+	- messages are now converted correctly
+	- set noexit(1) flag on Mail::Audit object before it
+		is returned with retrieve()
+	- removed SIGNATURE until I can install PGP
+
+0.01 Wed Jan  8 16:01:52 2003
 	- original version; created by h2xs 1.22 with options
 		-b 5.6.0 -AX -n WWW::Hotmail
 

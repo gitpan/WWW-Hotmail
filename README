@@ -3,9 +3,9 @@ NAME
 
 SYNOPSIS
       use WWW::Hotmail;
-      my $browser = new WWW::Hotmail;
-      $browser->login("foo", "bar");
-      for ($browser->messages) { $_->retrieve->accept; $_->delete; }
+      my $hotmail = new WWW::Hotmail;
+      $hotmail->login('foo@hotmail.com', "bar");
+      for ($hotmail->messages) { $_->retrieve->accept; $_->delete; }
 
 DESCRIPTION
     This module is a partial replacement for the "gotmail" script
@@ -13,14 +13,19 @@ DESCRIPTION
     try that instead.
 
     Create a new "WWW::Hotmail" object with "new", and then log in with your
-    Hotmail username and password. This will allow you to use the "messages"
-    method to look at the mail in your inbox.
+    MSN username and password. Make sure to add the domain to your username,
+    for example foo@hotmail.com. Then this will allow you to use the
+    "messages" method to look at the mail in your inbox.
 
     This method returns a list of "WWW::Hotmail::Message"s; each message
-    supports three methods: "subject" gives you the subject of the email,
-    just because it was stunningly easy to implement. "retrieve" turns the
-    email into a "Mail::Audit" object - see Mail::Audit for more details.
-    Finally "delete" moves it to your trash.
+    supports four methods: "subject" gives you the subject of the email,
+    just because it was stunningly easy to implement. "retrieve" retrieves
+    an email into a "Mail::Audit" object - see Mail::Audit for more details.
+    "from" gives you the from field. Finally "delete" moves it to your
+    trash.
+
+    This module should work with email addresses at charter.com, compaq.net,
+    hotmail.com, msn.com, passport.com, and webtv.net
 
     That's it. I said it was partial.
 
@@ -33,10 +38,14 @@ NOTE
     improve it in the future, but this is enough for release.
 
 AUTHOR
+    David Davis, <xantus@cpan.org> - I've taken ownership of this module,
+    please direct all questions to me.
+
+ORIGINAL AUTHOR
     Simon Cozens, <simon@kasei.com>
 
 COPYRIGHT AND LICENSE
-    Copyright 2003 by Kasei
+    Copyright 2003-2004 by Kasei
 
     This library is free software; you can redistribute it and/or modify it
     under the same terms as Perl itself.
