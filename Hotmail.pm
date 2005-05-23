@@ -6,7 +6,7 @@ use 5.006;
 use strict;
 use warnings;
 
-our $VERSION = '0.08';
+our $VERSION = '0.09';
 
 our $croak_on_error = 0;
 our $errstr = '';
@@ -37,14 +37,16 @@ sub login {
 		return undef;
 	};
 	# bypass the js detection page
-	if ($self->{content} =~ m/hiddenform/i) {
-		$self->form_name('hiddenform');
+	if ($self->{content} =~ m/<form.*(hiddenform|fmHF).*action=\"(\S+)\".*>/i) {
+		$self->form_name($1);
 		$self->submit();
 	}
-    $self->form_name('form1');
+	
+	$self->form_name('f1');
 	# this SHOULD cover charter.com, compaq.net, hotmail.com, msn.com, passport.com, and webtv.net
 	# all this java regex crap is needed just for this feature. Maybe this can be done better?
-	if ($self->{content} =~ m#name="$domain" action="([^"]+)"#) {
+	if ($self->{content} =~ m#name="f1".*action="([^"]+)"#i) {
+	#if ($self->{content} =~ m#name="$domain" action="([^"]+)"#) {
 		# current_form returns a HTML::Form obj
 		$self->current_form()->action($1);
 	} else {
@@ -55,7 +57,7 @@ sub login {
 	}
     $self->field(login => $email);
     $self->field(passwd => $pass);
-    $resp = $self->click('submit1'); # finally!
+	$resp = $self->submit();
     $resp->is_success || do {
 		$errstr = $resp->as_string;
 		croak $errstr if $croak_on_error;

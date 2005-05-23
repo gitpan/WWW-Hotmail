@@ -1,5 +1,8 @@
 Revision history for Perl extension WWW::Hotmail.
 
+0.09 Sun May 22 11:00:00 2005
+	- patch applied from Peter Pezaris
+
 0.08 Thu Dec 16 12:02:00 2004
 	- added errstr, errhtml, and croak_on_error
 	- improved docs

@@ -13,6 +13,11 @@ WriteMakefile(
 		 # got an automated error.
 		 Mail::Internet => 0,
     },
+	'dist'         => {
+		'SUFFIX'       => ".gz",
+		'DIST_DEFAULT' => 'all tardist',
+		'COMPRESS'     => "gzip -9vf",
+	},
     ($] >= 5.005 ?  
        (AUTHOR     => 'David Davis <xantus@cpan.org>') : ()),
 );
