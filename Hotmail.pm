@@ -6,7 +6,7 @@ use 5.006;
 use strict;
 use warnings;
 
-our $VERSION = '0.09';
+our $VERSION = '0.10';
 
 our $croak_on_error = 0;
 our $errstr = '';
@@ -64,7 +64,8 @@ sub login {
 		$errhtml = $resp->error_as_HTML;
 		return undef;
 	};
-    $self->{content} =~ /URL=(.+)"/ or do {
+    #$self->{content} =~ /URL=(.+)"/ or do {
+    $self->{content} =~ /replace\(\"(.+?)\"\)/ or do {
 		$errstr = 'Hotmail format changed!';
 		croak $errstr if $croak_on_error;
 		$self->error2html();

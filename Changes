@@ -1,5 +1,8 @@
 Revision history for Perl extension WWW::Hotmail.
 
+0.10 Tue aug 09 2005
+	- hotmail format changed again
+
 0.09 Sun May 22 11:00:00 2005
 	- patch applied from Peter Pezaris
 
